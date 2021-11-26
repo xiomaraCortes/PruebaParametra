@@ -1,17 +1,22 @@
 package com.co.prueba.parametra.demo.service.model.request;
 
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 
 import java.util.Date;
 
-@Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
+
 public class EmployeeRequestDTO {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String name;
     private String lastname;
     private String document;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthdate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date contractDate;
     private String charge;
     private Double salary;
@@ -20,6 +25,7 @@ public class EmployeeRequestDTO {
     }
 
     public EmployeeRequestDTO(String name, String lastname, String document, Date birthdate, Date contractDate, String charge, Double salary) {
+        super();
         this.name = name;
         this.lastname = lastname;
         this.document = document;

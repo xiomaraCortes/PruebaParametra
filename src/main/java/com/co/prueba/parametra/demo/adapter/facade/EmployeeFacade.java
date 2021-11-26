@@ -2,6 +2,7 @@ package com.co.prueba.parametra.demo.adapter.facade;
 
 import com.co.prueba.parametra.demo.service.model.EmployeeService;
 import com.co.prueba.parametra.demo.service.model.request.EmployeeRequestDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class EmployeeFacade {
         this.employeeResponseDTO = employeeService;
     }
 
-    public Object executeQuery(EmployeeRequestDTO employeeRequestDTO){
+    public Object executeQuery(EmployeeRequestDTO employeeRequestDTO) throws JsonProcessingException {
         return this.employeeResponseDTO.executeNetworkMultiLayer(employeeRequestDTO);
     }
 }

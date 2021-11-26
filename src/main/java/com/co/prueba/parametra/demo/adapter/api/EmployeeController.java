@@ -30,13 +30,13 @@ public class EmployeeController {
 
 
     //Se crea el controlador que llama al servicio 
-    @RequestMapping(value = "/get/", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> getNetworkMultiLayer(@RequestBody EmployeeRequestDTO employeeRequestDTO) {
+    @RequestMapping(value = "/getDataEmployee/", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> getDataEmployee(@RequestBody EmployeeRequestDTO employeeRequestDTO) {
 		try {
 			return new ResponseEntity<String>(this.gson.toJson(this.employeeFacade.executeQuery(employeeRequestDTO)), HttpStatus.OK);
 		}
 		catch (Exception e) {
-			return new ResponseEntity<String> (this.gson.toJson(""), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<String> (this.gson.toJson(new Exception("Error en procesamiento")), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }
