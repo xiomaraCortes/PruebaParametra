@@ -1,6 +1,4 @@
-package com.co.prueba.parametra.demo.service.model.response;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+package com.co.prueba.parametra.demo.domain.model.response;
 
 public class EmployeeResponseDTO {
 

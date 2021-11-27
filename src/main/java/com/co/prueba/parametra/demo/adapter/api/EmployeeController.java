@@ -3,7 +3,7 @@ package com.co.prueba.parametra.demo.adapter.api;
 import com.co.prueba.parametra.demo.adapter.ApiConst;
 import com.co.prueba.parametra.demo.adapter.api.model.BusinessException;
 import com.co.prueba.parametra.demo.adapter.facade.EmployeeFacade;
-import com.co.prueba.parametra.demo.service.model.request.EmployeeRequestDTO;
+import com.co.prueba.parametra.demo.domain.model.request.EmployeeRequestDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,9 +37,11 @@ public class EmployeeController {
 			return new ResponseEntity<String>(this.gson.toJson(this.employeeFacade.executeQuery(employeeRequestDTO)), HttpStatus.OK);
 		}
         catch (BusinessException ex) {
+            ex.printStackTrace();
             return new ResponseEntity<String> (this.gson.toJson(new Exception(ex)), HttpStatus.BAD_REQUEST);
         }
 		catch (Exception e) {
+		    e.printStackTrace();
 			return new ResponseEntity<String> (this.gson.toJson(new Exception("Se presentaron problemas tecnicos intente nuevamente ")), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

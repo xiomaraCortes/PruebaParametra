@@ -1,9 +1,12 @@
-package com.co.prueba.parametra.demo.service.model;
+package com.co.prueba.parametra.demo.domain.service;
 
 import com.co.prueba.parametra.demo.adapter.api.model.BusinessException;
-import com.co.prueba.parametra.demo.service.model.request.EmployeeRequestDTO;
-import com.co.prueba.parametra.demo.service.model.response.EmployeeResponseDTO;
+
+import com.co.prueba.parametra.demo.domain.model.database.UserEntity;
+import com.co.prueba.parametra.demo.domain.model.request.EmployeeRequestDTO;
+import com.co.prueba.parametra.demo.domain.repository.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -12,12 +15,23 @@ import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
+import com.co.prueba.parametra.demo.domain.model.response.EmployeeResponseDTO;
 import static com.google.gson.internal.$Gson$Preconditions.checkNotNull;
 
 
 @Service
 public class EmployeeService {
+
+
+    private UserRepository UserRepository;
+
+
+    @Autowired
+    public EmployeeService(UserRepository userRepository) {
+        this.UserRepository = userRepository;
+
+    }
+
 
     public EmployeeResponseDTO executeNetworkMultiLayer(EmployeeRequestDTO employeeRequestDTO) throws JsonProcessingException, BusinessException {
         checkItem(employeeRequestDTO.getName());
@@ -25,6 +39,15 @@ public class EmployeeService {
         checkItem(employeeRequestDTO.getDocument());
         checkItem(employeeRequestDTO.getCharge());
         checkAge(employeeRequestDTO.getBirthdate());
+        this.UserRepository.saveEmployee(new UserEntity(
+                this.UserRepository.getAll(),
+                employeeRequestDTO.getName(),
+                employeeRequestDTO.getLastname(),
+                employeeRequestDTO.getDocument(),
+                employeeRequestDTO.getBirthdate(),
+                employeeRequestDTO.getContractDate(),
+                employeeRequestDTO.getCharge(),
+                employeeRequestDTO.getSalary()));
         return new EmployeeResponseDTO( getDifferenceTime(employeeRequestDTO.getContractDate()), getDifferenceTime(employeeRequestDTO.getBirthdate()));
     }
 

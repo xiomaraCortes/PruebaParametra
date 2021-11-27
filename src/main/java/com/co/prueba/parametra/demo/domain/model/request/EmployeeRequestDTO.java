@@ -1,4 +1,4 @@
-package com.co.prueba.parametra.demo.service.model.request;
+package com.co.prueba.parametra.demo.domain.model.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
