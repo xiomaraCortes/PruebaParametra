@@ -1,6 +1,7 @@
 package com.co.prueba.parametra.demo.adapter.api;
 
 import com.co.prueba.parametra.demo.adapter.ApiConst;
+import com.co.prueba.parametra.demo.adapter.api.model.BusinessException;
 import com.co.prueba.parametra.demo.adapter.facade.EmployeeFacade;
 import com.co.prueba.parametra.demo.service.model.request.EmployeeRequestDTO;
 
@@ -35,8 +36,11 @@ public class EmployeeController {
 		try {
 			return new ResponseEntity<String>(this.gson.toJson(this.employeeFacade.executeQuery(employeeRequestDTO)), HttpStatus.OK);
 		}
+        catch (BusinessException ex) {
+            return new ResponseEntity<String> (this.gson.toJson(new Exception(ex)), HttpStatus.BAD_REQUEST);
+        }
 		catch (Exception e) {
-			return new ResponseEntity<String> (this.gson.toJson(new Exception("Error en procesamiento")), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<String> (this.gson.toJson(new Exception("Se presentaron problemas tecnicos intente nuevamente ")), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

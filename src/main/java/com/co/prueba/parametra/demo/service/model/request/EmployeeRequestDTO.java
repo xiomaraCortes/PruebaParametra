@@ -1,13 +1,8 @@
 package com.co.prueba.parametra.demo.service.model.request;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-
-
 import java.util.Date;
-
 
 public class EmployeeRequestDTO {
     @JsonInclude(JsonInclude.Include.NON_NULL)
